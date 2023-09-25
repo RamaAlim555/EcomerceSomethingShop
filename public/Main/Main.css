@@ -1,0 +1,24 @@
+#PopUpBody{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    width: 90%;
+    background-color: #e6e6e6;
+    border: solid 1px #FF7700;
+    z-index: 2;
+}
+
+#ProductList .card{
+    height: 250px;
+}
+
+.ScaleUp{
+    transition: ease 0.1s;
+  }
+  .ScaleUp:hover{
+    scale: 1.05;
+    border: solid orange 1px;
+    z-index: 1;
+  }

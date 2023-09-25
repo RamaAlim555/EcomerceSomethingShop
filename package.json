@@ -4,9 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "build": "npm run move-files",
-    "move-files": "mv server/* ."
+    "start": "node app.js"
   },
   "keywords": [],
   "author": "",

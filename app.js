@@ -41,7 +41,7 @@ app.get('/admin/dashboard', isAdmin, (req, res) => {
     const ProductData = JSONmanager.ShowProducts();
     res.render('dashboard',{ProductData:ProductData});
 });
-app.get('/admin/productdata',isAdmin,(req,res)=>{
+app.get('/admin/productdata',(req,res)=>{
     const ProductData = JSONmanager.ShowProducts();
     res.send(ProductData);
 });
@@ -147,7 +147,8 @@ app.post('/product/delete', isAdmin,(req, res) => {
 
 // Web Url
 app.get('/', (req, res) => {
-    res.render('main', {title:"Main"});
+    const ProductData = JSONmanager.ShowProducts();
+    res.render('main',{ProductData:ProductData});
 });
 
 //404//

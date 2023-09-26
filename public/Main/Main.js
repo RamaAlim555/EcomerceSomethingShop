@@ -62,7 +62,7 @@ function ReqQueryObject() {
 //Product List//
 const ProductList = document.getElementById('ProductList');
 function RefreshList() {
-  UpdateData();
+  UpdateData(()=>{
   ProductList.innerHTML = "";
 
   const queryParameters = ReqQueryObject();
@@ -81,7 +81,7 @@ function RefreshList() {
       </div>
     </div>
   `); 
-}
+})}
 function fillteredData(ProductData, queryParameters) {
   const filteredData = ProductData.filter((product) => {
     // Filter berdasarkan parameter "search"

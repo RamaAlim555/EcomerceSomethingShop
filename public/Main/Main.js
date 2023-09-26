@@ -76,7 +76,7 @@ function RefreshList() {
         <img src="${ e.img }" class="card-img-top" alt="...">
         <div class="card-body">
           <h4 class="card-text"> ${ e.name } </h4>
-          <h5 class="card-text"> Rp.${ e.price } </h5>
+          <h5 class="card-text"> Rp.${ FormatStringNumber(e.price) } </h5>
           <p class="card-text"> ${ e.description }</p>
         </div>
       </div>
@@ -110,4 +110,19 @@ function fillteredData(ProductData, queryParameters) {
   });
 
   return filteredData;
+}
+
+function FormatStringNumber(numberString) {
+  // Ubah string menjadi tipe data angka (number)
+  const number = parseFloat(numberString.replace(',', '.'));
+
+  // Cek apakah angka valid
+  if (isNaN(number)) {
+    return "Format tidak valid";
+  }
+
+  // Format angka dengan titik sebagai pemisah ribuan
+  const formattedNumber = number.toLocaleString('id-ID'); // Menggunakan 'id-ID' untuk format angka Indonesia
+
+  return formattedNumber;
 }

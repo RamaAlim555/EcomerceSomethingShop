@@ -100,20 +100,18 @@ app.post('/product/delete', isAdmin,(req, res) => {
     try { JSONmanager.DeleteProduct(req.body.index);
     
         // Menyusun pesan sukses
-        const successMessage = `
-            <html>
-            <head>
-                <script>
-                    setTimeout(() => {
-                        window.close();
-                    }, 1); // Sesuaikan waktu sesuai kebutuhan Anda
-                </script>
-            </head>
-            <body>
-            </body>
-            </html>
-        `;
-    
+        const successMessage = `<html><head><script>setTimeout(() => {window.close();}, 1); // Sesuaikan waktu sesuai kebutuhan Anda</script></head><body></body></html>`;
+        // Mengirim pesan sukses sebagai respons
+        res.send(successMessage);
+      } catch (error) {
+        // Mengirim pesan kesalahan sebagai respons jika terjadi kesalahan
+        res.status(500).send(`Terjadi kesalahan: ${error.message}`);
+      }
+});
+app.post('/product/edit', isAdmin,(req, res) => {
+    try { JSONmanager.EditProduct(req.body);
+        // Menyusun pesan sukses
+        const successMessage = `<html><head><script>setTimeout(() => {window.close();}, 1); // Sesuaikan waktu sesuai kebutuhan Anda</script></head><body></body></html>`;
         // Mengirim pesan sukses sebagai respons
         res.send(successMessage);
       } catch (error) {
@@ -142,13 +140,10 @@ app.post('/product/delete', isAdmin,(req, res) => {
 
 
 
-
-
-
 // Web Url
 app.get('/', (req, res) => {
     const ProductData = JSONmanager.ShowProducts();
-    res.render('main',{ProductData:ProductData});
+    res.render('main',{ProductData:ProductData,query:req.query});
 });
 
 //404//

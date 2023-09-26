@@ -44,7 +44,6 @@ function AddProduct(product) {
 
     // Menyimpan perubahan ke file
     fs.writeFileSync(jsonFilePath, JSON.stringify(products, null, 2), 'utf8');
-    console.log(`Produk ${product.name} telah ditambahkan.`);
   } else {
     throw new error(`Produk dengan nama ${product.name} sudah ada.`);
   }
@@ -73,10 +72,25 @@ function DeleteProduct(index) {
 
     // Menyimpan perubahan ke file
     fs.writeFileSync(jsonFilePath, JSON.stringify(products, null, 2), 'utf8');
-    console.log(`Produk dengan indeks ${index} telah dihapus.`);
   } else {
     throw new Error(`Indeks ${index} tidak valid.`);
   }
 }
 
-module.exports = { ShowProducts, AddProduct, DeleteProduct};
+function EditProduct(product){
+  ensureJsonFolderAndFile();
+
+  const jsonFilePath = path.join(JSON_FOLDER, ProductJSON);
+  const jsonData = fs.readFileSync(jsonFilePath, 'utf8');
+  const products = JSON.parse(jsonData);
+
+  if (products[product.index] != undefined) {
+    // Jika indeks ditemukan, ganti elemen dengan objek
+    products.splice(product.index, 1, product);
+  } else {
+    throw new Error(`Index product tidak ada`);
+  }
+  fs.writeFileSync(jsonFilePath, JSON.stringify(products, null, 2), 'utf8');
+}
+
+module.exports = { ShowProducts, AddProduct, DeleteProduct, EditProduct};

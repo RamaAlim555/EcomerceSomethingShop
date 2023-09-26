@@ -7,6 +7,13 @@ function AddProduct_PopUp()
         <h1>Add Product</h1>
         <label for="name">name:</label>
         <input type="text" id="name" name="name">
+        <label for="price">price:</label>
+        <input type="number" id="price" name="price">
+        <label for="category">category:</label>
+        <select name="category" id="category" class="col-12 col-sm-2">
+          <option value="Food">Food </option>
+          <option value="Beverage">Beverage </option>
+        </select>
         <label for="description">description:</label>
         <textarea id="description" name="description"></textarea>
         <button id="Post-AddProduct" type="submit">Add</button>
@@ -18,8 +25,8 @@ function DeleteProduct_PopUp(ProductIndex){
     PopUp.innerHTML += 
     `
     <form action="/product/delete" method="POST" target="_blank">
-        <h1>Are you sure to delete this product ?</h1>
-        <input class="d-none" type="number" value="${ProductIndex}" name="index" readonly>
+        <h1>Are you sure to delete <u>${ProductData[ProductIndex].name}</u> ?</h1>
+        <input type="hidden" value="${ProductIndex}" name="index" readonly>
         <button type="submit">Yes</button>
     </form>
     `
@@ -28,19 +35,38 @@ function DeleteProduct_PopUp(ProductIndex){
 function EditProduct_PopUp(ProductIndex){
     PopUp.innerHTML += 
     `
-    <form action="/product/add" method="POST" target="_blank">
+    <form action="/product/edit" method="POST" target="_blank">
         <h1>Add Product</h1>
+        <input type="hidden" value="${ProductIndex}" name="index" readonly>
         <label for="name">name:</label>
-        <input type="text" id="name" name="name">
+        <input type="text" id="name" name="name" value="${ProductData[ProductIndex].name}">
+        <label for="price">price:</label>
+        <input type="number" id="price" name="price" value="${ProductData[ProductIndex].price}">
+        <label for="category">category:</label>
+        <select name="category" id="category" class="col-12 col-sm-2">
+          <option value="Food">Food </option>
+          <option value="Beverage">Beverage </option>
+        </select>
         <label for="description">description:</label>
-        <textarea id="description" name="description"></textarea>
+        <textarea id="description" name="description">${ProductData[ProductIndex].description}</textarea>
         <button id="Post-AddProduct" type="submit">Add</button>
     </form>
     `
+
+    // Mengatur default category
+    const selectElement = document.querySelector('#category');
+    const options = selectElement.querySelectorAll('option');
+    options.forEach(option => {
+        if (option.value === ProductData[ProductIndex].category) {
+            option.setAttribute('selected', 'selected');
+        }
+    });
+
     ShowPopUp();
 }
 
 //Update Date
+let ProductData;
 const ProductList = document.getElementById('ProductList');
 function RenderData(data) {
     let ShowData = ``;
@@ -50,7 +76,7 @@ function RenderData(data) {
         <div class="Product">
           <h4>${e.name}</h4>
           <div class="Action">
-            <button onclick="EditProduct_PopUp(${i})" disabled>Edit</button>
+            <button onclick="EditProduct_PopUp(${i})">Edit</button>
             <button onclick="DeleteProduct_PopUp(${i})">Delete</button>
           </div>
         </div>
@@ -62,6 +88,7 @@ function RefreshData() {
 SourceData()
     .then((data) => {
     RenderData(data);
+    ProductData = data;
     })
     .catch((error) => {
     // Tangani kesalahan jika terjadi
@@ -90,4 +117,5 @@ const requestOptions = {
         console.error('Kesalahan:', error);
       });
   };
+  RefreshData();
 //End Get Data

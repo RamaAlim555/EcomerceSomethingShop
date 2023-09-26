@@ -1,0 +1,48 @@
+[
+  {
+    "index": "0",
+    "name": "Kopi Seger",
+    "price": "10000",
+    "category": "Beverage",
+    "description": "Kopi Wenak eee..."
+  },
+  {
+    "index": "1",
+    "name": "Kopi Pahit",
+    "price": "5000",
+    "category": "Beverage",
+    "description": "Kopi Pft... pait ui"
+  },
+  {
+    "name": "K.O. P1",
+    "price": "15000",
+    "category": "Beverage",
+    "description": "KnockOut Player 1. Kopi bikin pingsan."
+  },
+  {
+    "name": "|<0p!",
+    "price": "150000",
+    "category": "Beverage",
+    "description": "|<0p! = Kopi Alien"
+  },
+  {
+    "index": "4",
+    "name": "Telur ByeBag",
+    "price": "100000",
+    "category": "Food",
+    "description": "Telur bebek yang jika dipesan kamu harus membuang tasmu"
+  },
+  {
+    "index": "5",
+    "name": "Ayaman",
+    "price": "200000",
+    "category": "Food",
+    "description": "Ayam yang di anyam"
+  },
+  {
+    "name": "Ican",
+    "price": "200000",
+    "category": "Food",
+    "description": "Ikan kampung dari inggris"
+  }
+]

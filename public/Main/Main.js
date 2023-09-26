@@ -45,7 +45,6 @@ function UpdateData() {
         console.error('Kesalahan:', error);
         });
     }
-UpdateData();
 
 // URL //
 function ReqQueryObject() {
@@ -63,6 +62,7 @@ function ReqQueryObject() {
 //Product List//
 const ProductList = document.getElementById('ProductList');
 function RefreshList() {
+  UpdateData();
   ProductList.innerHTML = "";
 
   const queryParameters = ReqQueryObject();

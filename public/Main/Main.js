@@ -39,6 +39,7 @@ function UpdateData() {
     SourceData()
         .then((data) => {
         ProductData = data;
+        RefreshList();
         })
         .catch((error) => {
         // Tangani kesalahan jika terjadi
@@ -62,7 +63,7 @@ function ReqQueryObject() {
 //Product List//
 const ProductList = document.getElementById('ProductList');
 function RefreshList() {
-  UpdateData(()=>{
+
   ProductList.innerHTML = "";
 
   const queryParameters = ReqQueryObject();
@@ -81,7 +82,8 @@ function RefreshList() {
       </div>
     </div>
   `); 
-})}
+}
+
 function fillteredData(ProductData, queryParameters) {
   const filteredData = ProductData.filter((product) => {
     // Filter berdasarkan parameter "search"
